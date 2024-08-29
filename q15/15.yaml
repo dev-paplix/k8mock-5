@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: log-agent
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      name: log-agent
+  template:
+    metadata:
+      labels:
+        name: log-agent
+    spec:
+      nodeSelector:
+        env: production
+      containers:
+      - name: fluentd
+        image: fluentd:v1.17.1-1.0

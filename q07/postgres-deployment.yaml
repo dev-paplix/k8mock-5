@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-app
+spec:
+  storageClassName: fast-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-app
+  labels:
+    app: database-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database-app
+  template:
+    metadata:
+      labels:
+        app: database-app
+    spec:
+      volumes:
+        - name: test-app
+          persistentVolumeClaim:
+            claimName: pvc-app
+      containers:
+      - name: database-app
+        image: postgres:latest
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: test-app
+          subPath: postgres
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: my-secret
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: my-secret
+              key: POSTGRES_PASSWORD
+        - name: POSTGRESS_DB
+          valueFrom:
+            secretKeyRef:
+              name: my-secret
+              key: POSTGRES_DB
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+spec:
+  type: ClusterIP
+  selector:
+    app: database-app
+  ports:
+  - name: name-of-service-port
+    protocol: TCP
+    port: 8080
+    targetPort: 8080

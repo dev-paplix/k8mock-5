@@ -19,12 +19,12 @@ spec:
         image: nginx:latest
         ports:
         - containerPort: 80
-  toleration:
-  - key: "key"
-    operator: "Equal"
-    value: "dedicated"
-    effect: "NoSchedule"
-  - key: "value"
-    operator: "Equal"
-    value: "critical"
-    effect: "NoSchedule"
+      toleration:
+      - key: "key"
+        operator: "Equal"
+        value: "dedicated"
+        effect: "NoSchedule"
+      - key: "value"
+        operator: "Equal"
+        value: "critical"
+        effect: "NoSchedule"

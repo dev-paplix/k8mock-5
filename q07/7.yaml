@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: database-app
+  name: database-app
+spec:
+  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: task-pv-claim
+  containers:
+  - image: http
+    name: database-app
+    volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: task-pv-storage
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pv-claim
+spec:
+  storageClassName: local-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

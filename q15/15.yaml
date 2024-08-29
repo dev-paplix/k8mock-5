@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: log-agent
+  name: log-agent
+spec:
+  selector:
+    matchLabels:
+      app: log-agent
+  template:
+    metadata:
+      labels:
+        app: log-agent
+    spec:
+      containers:
+      - image: httpd
+        name: httpd
+      nodeSelector:
+        env: production

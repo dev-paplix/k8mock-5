@@ -6,7 +6,6 @@ spec:
   capacity:
     storage: 1Gi
   volumeMode: Filesystem
-  type: local
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Recycle

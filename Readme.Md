@@ -1,6 +1,6 @@
 Name: AWIS QIRANI
 
-Q1:
+- [x] Q1:
 
 A developer needs access to view Pods and Services within the `dev` namespace but should not have permissions to modify or delete any resources. How would you create an RBAC policy to meet this requirement?
 

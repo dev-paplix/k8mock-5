@@ -1,4 +1,4 @@
-Name:
+Name: Muhammed Hazim Abhar bin Mohamed Azahar
 
 Q1:
 
@@ -22,7 +22,7 @@ Check the CoreDNS ConfigMap and ensure that the kubernetes plugin is correctly c
 
 Q3:
 
-A specific node in your cluster is dedicated to running a critical application and should not accept any other workloads. This node has a taint with `key=dedicated`, `value=critical`, and e`ffect=NoSchedule`. Ensure that only the pods from a deployment named `critical-app` are allowed to run on this node.
+A specific node in your cluster is dedicated to running a critical application and should not accept any other workloads. This node has a taint with `key=dedicated`, `value=critical`, and `effect=NoSchedule`. Ensure that only the pods from a deployment named `critical-app` are allowed to run on this node.
 
 Task:
 
@@ -80,7 +80,6 @@ You need to expose a web application running in your cluster to the internet. Th
 Task:
 
 Create an Ingress resource that routes traffic from `example.com` to the `web-service` on port 80.
-
 
 
 Q10:

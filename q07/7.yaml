@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: db-pv
+  labels:
+    type: local
+spec:
+  storageClassName: fast-storage
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: database-app
+  name: database-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: database-app
+    spec:
+      volumes:
+      - name: db-storage
+        persistentVolumeClaim:
+          claimName: db-claim
+      containers:
+      - image: mysql
+        name: mysql
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - mountPath: "/var/lib/mysql"
+          name: db-storage
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: db-claim
+spec:
+  storageClassName: db-pv 
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: data-processing
+  name: data-processing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-processing
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: data-processing
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: disktype
+                operator: In
+                values:
+                - ssd  
+            - matchExpressions:
+              - key: disktype
+                operator: NotIn
+                values:
+                - hdd  
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+status: {}

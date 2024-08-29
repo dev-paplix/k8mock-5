@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: log-agent
+  labels:
+    k8s-app: log-agent
+spec:
+  selector:
+    matchLabels:
+      name: log-agent
+  template:
+    metadata:
+      labels:
+        name: log-agent
+    spec:
+      nodeSelector:
+        env: production
+      containers:
+      - name: log-agent

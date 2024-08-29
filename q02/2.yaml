@@ -1,0 +1,4 @@
+- kubectl get pods -n kube-system -l k8s-app=kube-dns
+- kubectl get svc -n kube-system
+- kubectl get configmap coredns -n kube-system -o yaml
+- kubectl rollout restart deployment coredns -n kube-system

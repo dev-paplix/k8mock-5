@@ -1,4 +1,4 @@
-Name:
+Name: Mohamad Syahrin Bin Suhaimi
 
 Q1:
 
@@ -114,7 +114,7 @@ Add a Pod Anti-Affinity rule to prevent data-processing pods from being schedule
 
 Q13:
 
-You need to upgrade your Kubernetes cluster from version 1.22 to version 1.23. Ensure that the control plane components are upgraded first, followed by the worker nodes.
+You need to upgrade your Kubernetes cluster from version the current version to version 1.30.4. Ensure that the control plane components are upgraded first, followed by the worker nodes.
 
 Task:
 

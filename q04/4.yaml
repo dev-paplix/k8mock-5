@@ -1,0 +1,1 @@
+kubectl label node node01 role=backend

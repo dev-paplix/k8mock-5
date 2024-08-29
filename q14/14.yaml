@@ -1,0 +1,17 @@
+piVersion: v1
+kind: List
+items:
+- apiVersion: v1
+  kind: ResourceQuota
+  metadata:
+    name: dev-quota
+  spec:
+    hard:
+      cpu: "4"
+      memory: 8Gi
+      pods: "10"
+    scopeSelector:
+      matchExpressions:
+      - operator : In
+        scopeName: PriorityClass
+        values: ["high"]

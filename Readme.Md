@@ -1,4 +1,4 @@
-Name:
+Name:Ali Imran Bin Shahrin
 
 Q1:
 
@@ -64,7 +64,7 @@ Create a PersistentVolume (PV) with a size of 1Gi and a fast-storage storage cla
 Create a PersistentVolumeClaim (PVC) that binds to this PV and ensure that a pod named database-app uses this PVC for its storage.
 
 
-Q8:
+Q8: REVIEW THIS QUESTION BACK DURING STUDY
 
 You have a Kubernetes namespace `finance` with a deployment named `billing-app`. The `billing-app` deployment should only allow inbound traffic from pods in the `web` namespace. All other traffic should be denied.
 
@@ -73,7 +73,7 @@ Task:
 Create a NetworkPolicy in the `finance` namespace to enforce this rule.
 
 
-Q9:
+Q9: Get used to ingress sikit lagi
 
 You need to expose a web application running in your cluster to the internet. The application is accessible via a service named `web-service` in the `default` namespace on port 80. The domain name for the application is `example.com`.
 
@@ -102,7 +102,7 @@ Create a snapshot of the ETCD data and save it to /var/backups/etcd-snapshot.db.
 Simulate an ETCD failure by restoring the cluster from the backup you created.
 
 
-Q12:
+Q12: revise this
 
 You have a deployment named data-processing that requires all its pods to be scheduled on the same node for data locality reasons. However, it should not be scheduled on the same node as another deployment named web-server.
 
@@ -112,9 +112,9 @@ Configure the data-processing deployment with a Pod Affinity rule to ensure all 
 Add a Pod Anti-Affinity rule to prevent data-processing pods from being scheduled on the same node as web-server.
 
 
-Q13:
+Q13: macam takde je version ni?
 
-You need to upgrade your Kubernetes cluster from version the current version to version 1.30.4. Ensure that the control plane components are upgraded first, followed by the worker nodes.
+You need to upgrade your Kubernetes cluster from version 1.22 to version 1.23. Ensure that the control plane components are upgraded first, followed by the worker nodes.
 
 Task:
 

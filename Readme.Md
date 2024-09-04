@@ -1,4 +1,4 @@
-Name:
+Name: NURSHAHIR IZMIN BIN SALLEH
 
 Q1:
 

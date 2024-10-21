@@ -1,0 +1,64 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: fast-storage
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "false"
+provisioner: csi-driver.example-vendor.example
+reclaimPolicy: Retain # default value is Delete
+allowVolumeExpansion: true
+mountOptions:
+  - discard # this might enable UNMAP / TRIM at the block storage layer
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  guaranteedReadWriteLatency: "true"
+  
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: database-app
+  name: database-app
+spec:
+  containers:
+  - image: mysql:latest
+    name: database-app
+    resources: {}
+    volumeMounts:
+    - mountPath: "/var/lib/mysql"
+      name: fast-storage
+  volumes:
+  - name: fast-storage
+    persistentVolumeClaim:
+      claimName: foo-pvc
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: foo-pv
+spec:
+  storageClassName: "fast-storage"
+  claimRef:
+    name: foo-pvc
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: foo-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: fast-storage
+  resources:
+    requests:
+      storage: 1Gi
